@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: hrms
+  liquibase:
+    change-log: classpath:liquibase-changelog.yaml
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/hrms
+    username: root
+    password: 
+  jpa:
+    database: mysql
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    liquibase: INFO

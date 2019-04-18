@@ -1,0 +1,13 @@
+databaseChangeLog:
+- changeSet:
+    id: user_details
+    author: aleksandar kovachev
+    changes:
+    - createTable:
+        tableName: user_details
+        columns:
+        - column:
+            name: id
+            type: int
+            constraints:
+              nullable: false

@@ -1,0 +1,9 @@
+databaseChangeLog:
+- property:
+    name: liquibase.schema
+    value: hrms
+    dbms: mysql
+- include:
+    file: tables.yaml
+- include:
+    file: constraints.yaml
