@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.thymeleaf.org http://www.thymeleaf.org">
+
+<div th:fragment="header">
+	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" th:href="@{/}">
+			<img
+				src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Tu-sofia-logo.svg"
+				style="max-width: 50px;"> [[#{logo}]]
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navBar" aria-controls="navBar" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navBar">
+			<div class="navbar-nav">
+				<a sec:authorize="isAnonymous()" class="nav-item nav-link"
+					th:href="@{/signin}" th:text="#{menu.login}"></a>
+				<a sec:authorize="hasAuthority('ROLE_ADMIN')"
+					class="nav-item nav-link" th:href="@{/adminPanel}"></a>
+				<a sec:authorize="isAuthenticated()" class="nav-item nav-link"
+					th:href="@{|/${#authentication.name}|}" th:text="#{menu.account}"></a>
+				<a sec:authorize="isAuthenticated()" class="nav-item nav-link"
+					th:href="@{/logout}" th:text="#{menu.logout}"></a>
+			</div>
+		</div>
+	</nav>
+</div>
+</html>
