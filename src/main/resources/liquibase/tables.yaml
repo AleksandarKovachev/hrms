@@ -1,0 +1,127 @@
+databaseChangeLog:
+- changeSet:
+    id: user_details
+    author: aleksandar kovachev
+    changes:
+    - createTable:
+        tableName: user_details
+        columns:
+        - column:
+            name: id
+            type: int
+            constraints:
+              nullable: false
+        - column:
+            name: username
+            type: varchar(60)
+            constraints:
+              nullable: false
+        - column:
+            name: password
+            type: varchar(60)
+            constraints:
+              nullable: false
+        - column:
+            name: email
+            type: varchar(100)
+            constraints:
+              nullable: false
+        - column:
+            name: egn
+            type: varchar(100)
+            constraints:
+              nullable: false
+        - column:
+            name: first_name
+            type: varchar(100)
+            constraints:
+              nullable: false
+        - column:
+            name: last_name
+            type: varchar(100)
+            constraints:
+              nullable: false
+        - column:
+            name: create_date
+            type: datetime
+            constraints:
+              nullable: false
+        - column:
+            name: receipt_date
+            type: datetime
+            constraints:
+              nullable: false
+        - column:
+            name: departure_date
+            type: datetime
+        - column:
+            name: status_id
+            type: int
+            constraints:
+              nullable: false
+        - column:
+            name: role_id
+            type: int
+            constraints:
+              nullable: false
+        - column:
+            name: position_id
+            type: int
+            constraints:
+              nullable: false
+        - column:
+            name: direct_manager_id
+            type: int
+            constraints:
+              nullable: false
+- changeSet:
+    id: user_position
+    author: aleksandar kovachev
+    changes:
+    - createTable:
+        tableName: user_position
+        columns:
+        - column:
+            name: id
+            type: int
+            constraints:
+              nullable: false
+        - column:
+            name: name
+            type: varchar(20)
+            constraints:
+              nullable: false
+- changeSet:
+    id: user_role
+    author: aleksandar kovachev
+    changes:
+    - createTable:
+        tableName: user_role
+        columns:
+        - column:
+            name: id
+            type: int
+            constraints:
+              nullable: false
+        - column:
+            name: name
+            type: varchar(20)
+            constraints:
+              nullable: false
+- changeSet:
+    id: user_status
+    author: aleksandar kovachev
+    changes:
+    - createTable:
+        tableName: user_status
+        columns:
+        - column:
+            name: id
+            type: int
+            constraints:
+              nullable: false
+        - column:
+            name: name
+            type: varchar(20)
+            constraints:
+              nullable: false

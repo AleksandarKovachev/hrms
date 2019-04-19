@@ -1,0 +1,17 @@
+databaseChangeLog:
+- changeSet:
+    id: role_data
+    author: aleksandar kovachev
+    changes:
+    - sql:
+        sql: insert into user_role(name) values ('ROLE_ADMIN');
+    - sql:
+        sql: insert into user_role(name) values ('ROLE_EMPLOYE');
+- changeSet:
+    id: status_data
+    author: aleksandar kovachev
+    changes:
+    - sql:
+        sql: insert into user_status(name) values ('ACTIVE');
+    - sql:
+        sql: insert into user_status(name) values ('INACTIVE');

@@ -4,6 +4,10 @@ databaseChangeLog:
     value: hrms
     dbms: mysql
 - include:
-    file: tables.yaml
+    file: liquibase/tables.yaml
 - include:
-    file: constraints.yaml
+    file: liquibase/pks.yaml
+- include:
+    file: liquibase/fks.yaml
+- include:
+    file: liquibase/data.yaml

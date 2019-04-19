@@ -1,0 +1,69 @@
+databaseChangeLog:
+- changeSet:
+    id: user_details_primary_key
+    author: aleksandar kovachev
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: id_pk
+        tableName: user_details
+- changeSet:
+    id: user_details_auto_increment
+    author: aleksandar kovachev
+    changes:
+    - addAutoIncrement:
+        columnDataType: int
+        columnName: id
+        incrementBy: 1
+        tableName: user_details
+- changeSet:
+    id: user_role_primary_key
+    author: aleksandar kovachev
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: id_pk
+        tableName: user_role
+- changeSet:
+    id: user_role_auto_increment
+    author: aleksandar kovachev
+    changes:
+    - addAutoIncrement:
+        columnDataType: int
+        columnName: id
+        incrementBy: 1
+        tableName: user_role
+- changeSet:
+    id: user_status_primary_key
+    author: aleksandar kovachev
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: id_pk
+        tableName: user_status
+- changeSet:
+    id: user_status_auto_increment
+    author: aleksandar kovachev
+    changes:
+    - addAutoIncrement:
+        columnDataType: int
+        columnName: id
+        incrementBy: 1
+        tableName: user_status
+- changeSet:
+    id: user_position_primary_key
+    author: aleksandar kovachev
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: id_pk
+        tableName: user_position
+- changeSet:
+    id: user_position_auto_increment
+    author: aleksandar kovachev
+    changes:
+    - addAutoIncrement:
+        columnDataType: int
+        columnName: id
+        incrementBy: 1
+        tableName: user_status
