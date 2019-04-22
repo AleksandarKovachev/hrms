@@ -65,21 +65,19 @@ databaseChangeLog:
             constraints:
               nullable: false
         - column:
-            name: position_id
+            name: department_id
             type: int
             constraints:
               nullable: false
         - column:
             name: direct_manager_id
             type: int
-            constraints:
-              nullable: false
 - changeSet:
-    id: user_position
+    id: department
     author: aleksandar kovachev
     changes:
     - createTable:
-        tableName: user_position
+        tableName: department
         columns:
         - column:
             name: id

@@ -13,13 +13,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table
-public class UserPosition implements Serializable {
+public class Department implements Serializable {
 
   private static final long serialVersionUID = -4857464766731059715L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
   private String name;
 

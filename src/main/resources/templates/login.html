@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/BaseLayout}">
+<head>
+<title th:text="#{logo}"></title>
+</head>
+<body>
+	<section layout:fragment="body">
+		<form th:action="@{/login}" method="POST">
+			<div class="container mt-5">
+				<div class="form-group form-row">
+					<input type="text" class="form-control" id="username"
+						name="username" th:placeholder="#{input.username}">
+				</div>
+				<div class="form-group form-row">
+					<input type="password" class="form-control" id="password"
+						name="password" th:placeholder="#{input.password}">
+				</div>
+
+				<div class="form-row align-items-center">
+					<button type="submit" class="btn btn-primary"
+						th:text="#{input.login}"></button>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

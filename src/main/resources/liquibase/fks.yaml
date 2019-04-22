@@ -1,16 +1,16 @@
 databaseChangeLog:
 - changeSet:
-    id: user_position_id_foreign_key
+    id: user_department_id_foreign_key
     author: aleksandar kovachev
     changes:
     - addForeignKeyConstraint:
-        baseColumnNames: position_id
+        baseColumnNames: department_id
         baseTableName: user_details
-        constraintName: user_position_fk
+        constraintName: user_department_fk
         onDelete: RESTRICT
         onUpdate: RESTRICT
         referencedColumnNames: id
-        referencedTableName: user_position
+        referencedTableName: department
 - changeSet:
     id: user_role_id_foreign_key
     author: aleksandar kovachev

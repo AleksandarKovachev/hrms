@@ -55,7 +55,7 @@ public class User implements UserDetails {
   private UserRole role;
 
   @ManyToOne
-  private UserPosition position;
+  private Department department;
 
   @ManyToOne
   private User directManager;

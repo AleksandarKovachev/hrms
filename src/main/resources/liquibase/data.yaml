@@ -15,3 +15,21 @@ databaseChangeLog:
         sql: insert into user_status(name) values ('ACTIVE');
     - sql:
         sql: insert into user_status(name) values ('INACTIVE');
+- changeSet:
+    id: position_data
+    author: aleksandar kovachev
+    changes:
+    - sql:
+        sql: insert into department(name) values ('ADMIN');
+    - sql:
+        sql: insert into department(name) values ('MANAGER');
+    - sql:
+        sql: insert into department(name) values ('IT');
+    - sql:
+        sql: insert into department(name) values ('FINANCE');
+    - sql:
+        sql: insert into department(name) values ('ACCOUNTING');
+    - sql:
+        sql: insert into department(name) values ('DEVELOPMENT');
+    - sql:
+        sql: insert into department(name) values ('HR');

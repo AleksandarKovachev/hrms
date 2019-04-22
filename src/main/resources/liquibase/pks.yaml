@@ -51,19 +51,19 @@ databaseChangeLog:
         incrementBy: 1
         tableName: user_status
 - changeSet:
-    id: user_position_primary_key
+    id: department_primary_key
     author: aleksandar kovachev
     changes:
     - addPrimaryKey:
         columnNames: id
         constraintName: id_pk
-        tableName: user_position
+        tableName: department
 - changeSet:
-    id: user_position_auto_increment
+    id: department_auto_increment
     author: aleksandar kovachev
     changes:
     - addAutoIncrement:
         columnDataType: int
         columnName: id
         incrementBy: 1
-        tableName: user_status
+        tableName: department

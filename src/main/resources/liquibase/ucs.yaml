@@ -1,0 +1,9 @@
+databaseChangeLog:
+- changeSet:
+    id: user_username_unique_constraint
+    author: aleksandar kovachev
+    changes:
+    - addUniqueConstraint:
+        columnNames: username
+        constraintName: username_unique_constraint
+        tableName: user_details

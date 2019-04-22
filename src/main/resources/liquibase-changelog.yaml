@@ -10,4 +10,6 @@ databaseChangeLog:
 - include:
     file: liquibase/fks.yaml
 - include:
+    file: liquibase/ucs.yaml
+- include:
     file: liquibase/data.yaml
