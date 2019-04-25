@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/BaseLayout}">
+<head>
+<title>Add user</title>
+</head>
+<body>
+	<section layout:fragment="body">
+		<form th:action="@{/addUser}" method="POST" th:object="${form}">
+			<div class="container mt-5">
+				<div class="form-group form-row">
+					<input type="text" class="form-control" id="username"
+						name="username" th:placeholder="#{input.username}"
+						th:field="*{username}">
+				</div>
+				<div class="form-group form-row">
+					<input type="password" class="form-control" id="password"
+						name="password" th:placeholder="#{input.password}"
+						th:field="*{password}">
+				</div>
+				<div class="form-group form-row">
+					<select id="department" class="form-control"
+						th:field="*{departmentId}" data-live-search="true"
+						data-width="100%">
+						<option value="0" disabled selected th:text="#{choose}" />
+						<option th:each="department : ${departments}"
+							th:value="${department.id}" th:text="${department.name}"></option>
+					</select>
+				</div>
+
+				<div class="form-row align-items-center">
+					<button type="submit" class="btn btn-primary"
+						th:text="#{input.login}"></button>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

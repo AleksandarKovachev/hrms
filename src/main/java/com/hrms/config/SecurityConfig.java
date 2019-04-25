@@ -48,10 +48,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Override
+  // @formatter:off
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable().logout().logoutSuccessUrl("/").logoutUrl("/logout").invalidateHttpSession(true)
-        .deleteCookies("JSESSIONID").and().formLogin().loginPage("/login").permitAll().and().authorizeRequests()
-        .anyRequest().permitAll();
+    http.csrf().disable()
+        .logout().logoutSuccessUrl("/").logoutUrl("/logout")
+        .invalidateHttpSession(true).deleteCookies("JSESSIONID")
+        .and()
+        .formLogin().loginPage("/login").permitAll()
+        .and()
+        .authorizeRequests().antMatchers("/addUser").hasRole("ADMIN")
+        .and()
+        .authorizeRequests().anyRequest().permitAll();
 
     User user = userRepository.findByUsername("admin");
     if (user == null) {
@@ -70,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       userRepository.save(user);
     }
   }
+  // @formatter:on
 
   @Bean
   public AuthenticationManager customAuthenticationManager() throws Exception {
