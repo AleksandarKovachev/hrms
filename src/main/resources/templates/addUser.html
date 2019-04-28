@@ -8,6 +8,8 @@
 </head>
 <body>
 	<section layout:fragment="body">
+		<div th:replace="fragment/Messages :: messages"></div>
+
 		<form th:action="@{/addUser}" method="POST" th:object="${form}">
 			<div class="container mt-5">
 				<div class="form-group form-row">
@@ -21,21 +23,50 @@
 						th:field="*{password}">
 				</div>
 				<div class="form-group form-row">
+					<input type="text" class="form-control" id="firstName"
+						name="firstName" th:placeholder="#{input.firstName}"
+						th:field="*{firstName}">
+				</div>
+				<div class="form-group form-row">
+					<input type="text" class="form-control" id="lastName"
+						name="lastName" th:placeholder="#{input.lastName}"
+						th:field="*{lastName}">
+				</div>
+				<div class="form-group form-row">
+					<input type="text" class="form-control" id="egn" name="egn"
+						th:placeholder="#{input.egn}" th:field="*{egn}">
+				</div>
+				<div class="form-group form-row">
+					<input type="email" class="form-control" id="email" name="email"
+						th:placeholder="#{input.email}" th:field="*{email}">
+				</div>
+				<div class="form-group form-row">
 					<select id="department" class="form-control"
-						th:field="*{departmentId}" data-live-search="true"
-						data-width="100%">
-						<option value="0" disabled selected th:text="#{choose}" />
+						th:field="*{departmentId}">
+						<option value="0" disabled selected th:text="#{input.department}" />
 						<option th:each="department : ${departments}"
 							th:value="${department.id}" th:text="${department.name}"></option>
 					</select>
 				</div>
+				<div class="form-group form-row">
+					<input type="text" class="form-control" id="datepicker"
+						th:field="*{receiptDate}">
+				</div>
 
 				<div class="form-row align-items-center">
 					<button type="submit" class="btn btn-primary"
-						th:text="#{input.login}"></button>
+						th:text="#{menu.addUser}"></button>
 				</div>
 			</div>
 		</form>
+	</section>
+
+	<section layout:fragment="js">
+		<script>
+			$(document).ready(function() {
+				$('#datepicker').datepicker();
+			});
+		</script>
 	</section>
 </body>
 </html>
