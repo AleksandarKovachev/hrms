@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.sql.Blob;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -13,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -40,6 +42,8 @@ public class User implements UserDetails {
   private String firstName;
 
   private String lastName;
+  
+  private String profileImage;
 
   @CreatedDate
   private Date createDate;

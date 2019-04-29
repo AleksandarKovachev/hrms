@@ -42,6 +42,9 @@ databaseChangeLog:
             constraints:
               nullable: false
         - column:
+            name: profile_image
+            type: longtext
+        - column:
             name: create_date
             type: datetime
             constraints:

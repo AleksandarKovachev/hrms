@@ -20,3 +20,32 @@
 	border: 2px solid #a6ca8a;
 	color: #00ff00;
 }
+
+div.show-image {
+	position: relative;
+	float: left;
+	margin: 5px;
+}
+
+div.show-image:hover img {
+	opacity: 0.5;
+}
+
+div.show-image:hover input {
+	display: block;
+}
+
+div.show-image input {
+	position: absolute;
+	display: none;
+}
+
+div.show-image input.update {
+	top: 0;
+	left: 0;
+}
+
+div.show-image input.delete {
+	top: 0;
+	left: 79%;
+}
