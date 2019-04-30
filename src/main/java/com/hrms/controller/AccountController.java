@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Base64Utils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -41,13 +42,27 @@ public class AccountController {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
 
+		User user = userRepository.findById(Long.valueOf(id)).orElse(null);
+		if (user == null) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
+
 		try {
-			User user = userRepository.findById(Long.valueOf(id)).orElse(null);
 			user.setProfileImage(Base64Utils.encodeToString(accountImage.getBytes()));
-			userRepository.save(user);
 		} catch (IOException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
+
+		userRepository.save(user);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/profileImage/{id}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Void> profileImage(@PathVariable String id) {
+		User user = userRepository.findById(Long.valueOf(id)).orElse(null);
+		user.setProfileImage(null);
+		userRepository.save(user);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 

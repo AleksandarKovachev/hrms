@@ -1,6 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/BaseLayout}">
 <head>
@@ -20,11 +21,17 @@
 							class="img-fluid rounded-circle mx-auto d-block"
 							style="max-height: 300px;">
 						<input type="file" hidden="true" accept="image/*"
-							id="accountImageBtn" name="accountImage" />
+							id="accountImageBtn" name="accountImage"
+							sec:authorize="isAuthenticated()"
+							th:if="${#authentication.name == username}" />
 						<input class="btn update" type="button" id="updateAccountImageBtn"
-							th:value="#{account.image.update}" />
+							th:value="#{account.image.update}"
+							sec:authorize="isAuthenticated()"
+							th:if="${#authentication.name == username}" />
 						<input class="btn delete" type="button" id="deleteAccountImage"
-							th:value="#{account.image.delete}" />
+							th:value="#{account.image.delete}"
+							sec:authorize="isAuthenticated()"
+							th:if="${#authentication.name == username}" />
 					</form>
 				</div>
 			</div>
@@ -95,7 +102,7 @@
 		<script src="http://malsup.github.com/jquery.form.js"></script>
 		<script th:inline="javascript">
 			$(document).ready(function() {
-				var accoundId = /*[[${account.id}]]*/;
+				var accountId = /*[[${account.id}]]*/;
 				
 				$("#updateAccountImageBtn").click(function() {
 					$("#accountImageBtn").trigger('click');
@@ -108,7 +115,7 @@
 				
 				$("#updateImage").ajaxForm({
 				 	type : 'PATCH',
-				 	url : "/profileImage/" + accoundId,
+				 	url : "/profileImage/" + accountId,
 					timeout: 30000,
 					success : function(response) {
 						var reader = new FileReader();
@@ -119,6 +126,16 @@
 		               $("#accountImageBtn").val("");
 					}
 			 	});
+
+				$("#deleteAccountImage").click(function() {
+					$.ajax({
+						type : 'DELETE',
+						url : "/profileImage/" + accountId,
+						success : function(response) {
+							$("#accountImage").attr("src", "/images/profile-placeholder.png");
+						}
+					});
+				});
 			});
 		</script>
 	</section>
