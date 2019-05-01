@@ -24,18 +24,6 @@ databaseChangeLog:
         referencedColumnNames: id
         referencedTableName: user_role
 - changeSet:
-    id: user_status_id_foreign_key
-    author: aleksandar kovachev
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: status_id
-        baseTableName: user_details
-        constraintName: user_status_fk
-        onDelete: RESTRICT
-        onUpdate: RESTRICT
-        referencedColumnNames: id
-        referencedTableName: user_status
-- changeSet:
     id: user_manager_id_foreign_key
     author: aleksandar kovachev
     changes:

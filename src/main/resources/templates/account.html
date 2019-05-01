@@ -96,6 +96,18 @@
 					<strong class="text-center" th:text="${account.department.name}"></strong>
 				</div>
 			</div>
+			<div class="row justify-content-md-center"
+				th:if="${account.directManager != null}">
+				<div class="col col-lg-2">
+					<span th:text="#{manager}"></span>
+				</div>
+				<div class="col col-lg-2">
+					<a th:href="${account.directManager.username}">
+						<strong class="text-center"
+							th:text="${account.directManager.firstName + ' ' + account.directManager.lastName}"></strong>
+					</a>
+				</div>
+			</div>
 		</div>
 	</section>
 	<section layout:fragment="js">

@@ -58,8 +58,8 @@ databaseChangeLog:
             name: departure_date
             type: datetime
         - column:
-            name: status_id
-            type: int
+            name: isActive
+            type: tinyint
             constraints:
               nullable: false
         - column:
@@ -98,23 +98,6 @@ databaseChangeLog:
     changes:
     - createTable:
         tableName: user_role
-        columns:
-        - column:
-            name: id
-            type: int
-            constraints:
-              nullable: false
-        - column:
-            name: name
-            type: varchar(20)
-            constraints:
-              nullable: false
-- changeSet:
-    id: user_status
-    author: aleksandar kovachev
-    changes:
-    - createTable:
-        tableName: user_status
         columns:
         - column:
             name: id

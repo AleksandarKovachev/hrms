@@ -49,8 +49,15 @@
 					</select>
 				</div>
 				<div class="form-group form-row">
+					<select id="manager" class="form-control" th:field="*{managerId}">
+						<option value="0" disabled selected th:text="#{input.manager}" />
+						<option th:each="user : ${users}" th:value="${user.id}"
+							th:text="${user.firstName + ' ' + user.lastName + ' (' + user.department.name + ')'}"></option>
+					</select>
+				</div>
+				<div class="form-group form-row">
 					<input type="text" class="form-control" id="datepicker"
-						th:field="*{receiptDate}">
+						th:placeholder="#{input.receiptDate}" th:field="*{receiptDate}">
 				</div>
 
 				<div class="form-row align-items-center">

@@ -30,7 +30,7 @@ public class AccountController {
 	@PreAuthorize("isAuthenticated()")
 	public ModelAndView account(@PathVariable String username) {
 		ModelMap modelMap = new ModelMap();
-		modelMap.addAttribute("account", userRepository.findByUsername(username));
+		modelMap.addAttribute("account", userRepository.findByUsernameAndIsActive(username, 1));
 		return new ModelAndView("account", modelMap);
 	}
 

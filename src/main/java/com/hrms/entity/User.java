@@ -1,11 +1,5 @@
 package com.hrms.entity;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.sql.Blob;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -14,9 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
@@ -25,78 +23,77 @@ import lombok.Data;
 @Table(name = "user_details")
 public class User implements UserDetails {
 
-  private static final long serialVersionUID = -2244863768095319371L;
+	private static final long serialVersionUID = -2244863768095319371L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-  private String username;
+	private String username;
 
-  private String password;
+	private String password;
 
-  private String email;
+	private String email;
 
-  private String egn;
+	private String egn;
 
-  private String firstName;
+	private String firstName;
 
-  private String lastName;
-  
-  private String profileImage;
+	private String lastName;
 
-  @CreatedDate
-  private Date createDate;
+	private String profileImage;
 
-  private Date receiptDate;
+	@CreatedDate
+	private Date createDate;
 
-  private Date departureDate;
+	private Date receiptDate;
 
-  @ManyToOne
-  private UserStatus status;
+	private Date departureDate;
 
-  @ManyToOne
-  private UserRole role;
+	private int isActive;
 
-  @ManyToOne
-  private Department department;
+	@ManyToOne
+	private UserRole role;
 
-  @ManyToOne
-  private User directManager;
+	@ManyToOne
+	private Department department;
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Arrays.asList(new SimpleGrantedAuthority(role.getName()));
-  }
+	@ManyToOne
+	private User directManager;
 
-  @Override
-  public String getPassword() {
-    return password;
-  }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Arrays.asList(new SimpleGrantedAuthority(role.getName()));
+	}
 
-  @Override
-  public String getUsername() {
-    return username;
-  }
+	@Override
+	public String getPassword() {
+		return password;
+	}
 
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
+	@Override
+	public String getUsername() {
+		return username;
+	}
 
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 }

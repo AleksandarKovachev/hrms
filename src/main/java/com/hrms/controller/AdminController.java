@@ -22,18 +22,13 @@ import com.hrms.form.UserForm;
 import com.hrms.repository.DepartmentRepository;
 import com.hrms.repository.UserRepository;
 import com.hrms.repository.UserRoleRepository;
-import com.hrms.repository.UserStatusRepository;
 import com.hrms.util.UserRoles;
-import com.hrms.util.UserStatuses;
 
 @Controller
 public class AdminController {
 
 	@Autowired
 	private UserRoleRepository userRoleRepository;
-
-	@Autowired
-	private UserStatusRepository userStatusRepository;
 
 	@Autowired
 	private DepartmentRepository departmentRepository;
@@ -54,8 +49,8 @@ public class AdminController {
 	public ModelAndView addUserView(@ModelAttribute UserForm form) {
 		ModelMap modelMap = new ModelMap();
 		modelMap.addAttribute("form", form);
-		modelMap.addAttribute("statuses", userStatusRepository.findAll());
 		modelMap.addAttribute("departments", departmentRepository.findAll());
+		modelMap.addAttribute("users", userRepository.findAll());
 		return new ModelAndView("addUser", modelMap);
 	}
 
@@ -63,16 +58,17 @@ public class AdminController {
 	public ModelAndView addUser(@ModelAttribute UserForm form) {
 		ModelMap modelMap = new ModelMap();
 		modelMap.addAttribute("form", form);
-		modelMap.addAttribute("statuses", userStatusRepository.findAll());
 		modelMap.addAttribute("departments", departmentRepository.findAll());
+		modelMap.addAttribute("users", userRepository.findAll());
 		List<String> errors = validator.validate(form).stream().map(v -> v.getMessage()).collect(Collectors.toList());
 		if (CollectionUtils.isEmpty(errors)) {
 			modelMap.addAttribute("message", messageSource.getMessage("addUser.successful", null, Locale.getDefault()));
 			User user = form.toUser();
 			user.setPassword(passwordEncoder.encode(form.getPassword()));
 			user.setDepartment(departmentRepository.getOne(form.getDepartmentId()));
-			user.setStatus(userStatusRepository.getOne(UserStatuses.ACTIVE.getId()));
+			user.setIsActive(1);
 			user.setRole(userRoleRepository.getOne(UserRoles.EMPLOYEE.getId()));
+			user.setDirectManager(userRepository.getOne((long) form.getManagerId()));
 			userRepository.save(user);
 		} else {
 			modelMap.addAttribute("errors", errors);

@@ -43,6 +43,8 @@ public class UserForm {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private String receiptDate;
 
+	private int managerId;
+
 	public User toUser() {
 		User user = new User();
 		user.setUsername(username);
