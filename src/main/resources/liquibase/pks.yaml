@@ -50,3 +50,20 @@ databaseChangeLog:
         columnName: id
         incrementBy: 1
         tableName: department
+- changeSet:
+    id: vacation_primary_key
+    author: aleksandar kovachev
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: id_pk
+        tableName: vacation
+- changeSet:
+    id: vacation_auto_increment
+    author: aleksandar kovachev
+    changes:
+    - addAutoIncrement:
+        columnDataType: int
+        columnName: id
+        incrementBy: 1
+        tableName: vacation

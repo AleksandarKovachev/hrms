@@ -1,7 +1,5 @@
 package com.hrms.form;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.Email;
@@ -11,6 +9,7 @@ import javax.validation.constraints.Positive;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.hrms.entity.User;
+import com.hrms.util.DateUtil;
 
 import lombok.Data;
 
@@ -54,11 +53,7 @@ public class UserForm {
 		user.setEgn(egn);
 		user.setEmail(email);
 		user.setCreateDate(new Date());
-		try {
-			user.setReceiptDate(new SimpleDateFormat("dd/MM/yyyy").parse(receiptDate));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		user.setReceiptDate(DateUtil.parse(receiptDate));
 		return user;
 	}
 

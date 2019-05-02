@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/BaseLayout}">
+<head>
+<title th:text="#{menu.vacations}"></title>
+</head>
+<body>
+	<section layout:fragment="body">
+		<div th:replace="fragment/Messages :: messages"></div>
+		<form th:action="@{/vacation}" method="POST" th:object="${form}">
+			<div class="container mt-5">
+				<div class="form-group form-row">
+					<input type="text" class="form-control datepicker col"
+						th:placeholder="#{input.fromDate}" th:field="*{fromDate}">
+					<input type="text" class="form-control datepicker col offset-md-1"
+						th:placeholder="#{input.toDate}" th:field="*{toDate}">
+
+					<button type="submit" class="btn btn-primary col offset-md-1"
+						th:text="#{input.addVacation}"></button>
+				</div>
+			</div>
+		</form>
+	</section>
+	<section layout:fragment="js">
+		<script>
+			$(document).ready(function() {
+				$('.datepicker').datepicker({format: 'dd/mm/yyyy'});
+			});
+		</script>
+	</section>
+</body>
+</html>

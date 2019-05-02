@@ -8,15 +8,7 @@ databaseChangeLog:
     - sql:
         sql: insert into user_role(name) values ('ROLE_EMPLOYE');
 - changeSet:
-    id: status_data
-    author: aleksandar kovachev
-    changes:
-    - sql:
-        sql: insert into user_status(name) values ('ACTIVE');
-    - sql:
-        sql: insert into user_status(name) values ('INACTIVE');
-- changeSet:
-    id: position_data
+    id: department_data
     author: aleksandar kovachev
     changes:
     - sql:
