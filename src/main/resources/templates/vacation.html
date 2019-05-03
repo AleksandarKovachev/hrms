@@ -22,6 +22,53 @@
 				</div>
 			</div>
 		</form>
+
+		<h2 class="row justify-content-md-center"
+			th:text="#{vacations.header}"></h2>
+
+		<div class="container shadow-lg p-3 mb-5 bg-white"
+			th:each="vacation : ${vacations}">
+			<div class="row">
+				<div class="col col-lg-2">
+					<a th:href="${vacation.user.username}">
+						<img
+							th:src="${vacation.user.profileImage == null ? '/images/profile-placeholder.png' : 'data:image/png;base64,' + vacation.user.profileImage}"
+							class="img-fluid rounded-circle mx-auto d-block"
+							style="max-height: 150px;">
+					</a>
+				</div>
+				<div class="col">
+					<div class="row justify-content-md-center">
+						<a th:href="${vacation.user.username}">
+							<strong class="text-center"
+								th:text="${vacation.user.firstName + ' ' + vacation.user.lastName}"></strong>
+						</a>
+					</div>
+					<div class="row justify-content-md-center">
+						<strong class="text-center"
+							th:text="${vacation.user.department.name}"></strong>
+					</div>
+					<div class="row justify-content-md-center">
+						<div class="col col-lg-2">
+							<span th:text="#{input.fromDate}"></span>
+						</div>
+						<div class="col col-lg-2">
+							<strong class="text-center"
+								th:text="${#dates.format(vacation.fromDate, 'dd MMMM yyyy')}"></strong>
+						</div>
+					</div>
+					<div class="row justify-content-md-center">
+						<div class="col col-lg-2">
+							<span th:text="#{input.toDate}"></span>
+						</div>
+						<div class="col col-lg-2">
+							<strong class="text-center"
+								th:text="${#dates.format(vacation.toDate, 'dd MMMM yyyy')}"></strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	<section layout:fragment="js">
 		<script>

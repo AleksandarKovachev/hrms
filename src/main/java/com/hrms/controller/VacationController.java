@@ -1,6 +1,7 @@
 package com.hrms.controller;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ import com.hrms.entity.Vacation;
 import com.hrms.form.VacationForm;
 import com.hrms.repository.UserRepository;
 import com.hrms.repository.VacationRepository;
+import com.hrms.util.DateUtil;
 
 @Controller
 public class VacationController {
@@ -38,9 +40,11 @@ public class VacationController {
 	private Validator validator;
 
 	@GetMapping("/vacation")
-	public ModelAndView vacationGet(@ModelAttribute VacationForm form) {
+	public ModelAndView vacationGet(@ModelAttribute VacationForm form, Principal principal) {
 		ModelMap modelMap = new ModelMap();
 		modelMap.addAttribute("form", form);
+		modelMap.addAttribute("vacations", vacationRepository.getVacationsByDepartment(
+				userRepository.findByUsernameAndIsActive(principal.getName(), 1).getDepartment().getId(), new Date()));
 		return new ModelAndView("vacation", modelMap);
 	}
 
@@ -48,7 +52,12 @@ public class VacationController {
 	public ModelAndView vacationPost(@ModelAttribute VacationForm form, Principal principal) {
 		ModelMap modelMap = new ModelMap();
 		modelMap.addAttribute("form", form);
+		modelMap.addAttribute("vacations", vacationRepository.getVacationsByDepartment(
+				userRepository.findByUsernameAndIsActive(principal.getName(), 1).getDepartment().getId(), new Date()));
 		List<String> errors = validator.validate(form).stream().map(v -> v.getMessage()).collect(Collectors.toList());
+		if (DateUtil.parse(form.getFromDate()).after(DateUtil.parse(form.getToDate()))) {
+			errors.add(messageSource.getMessage("fromDate.before.toDate", null, Locale.getDefault()));
+		}
 		if (CollectionUtils.isEmpty(errors)) {
 			modelMap.addAttribute("message",
 					messageSource.getMessage("vacation.successful", null, Locale.getDefault()));
