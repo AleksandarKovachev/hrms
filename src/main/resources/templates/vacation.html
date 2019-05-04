@@ -8,9 +8,9 @@
 </head>
 <body>
 	<section layout:fragment="body">
-		<div th:replace="fragment/Messages :: messages"></div>
-		<form th:action="@{/vacation}" method="POST" th:object="${form}">
-			<div class="container mt-5">
+		<div class="container mt-5">
+			<div th:replace="fragment/Messages :: messages"></div>
+			<form th:action="@{/vacation}" method="POST" th:object="${form}">
 				<div class="form-group form-row">
 					<input type="text" class="form-control datepicker col"
 						th:placeholder="#{input.fromDate}" th:field="*{fromDate}">
@@ -20,8 +20,8 @@
 					<button type="submit" class="btn btn-primary col offset-md-1"
 						th:text="#{input.addVacation}"></button>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 
 		<h2 class="row justify-content-md-center"
 			th:text="#{myVacations.header}"

@@ -55,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .authorizeRequests().antMatchers("/vacation").authenticated()
         .and()
+        .authorizeRequests().antMatchers("/changePassword").authenticated()
+        .and()
         .authorizeRequests().anyRequest().permitAll();
 
     User user = userRepository.findByUsernameAndIsActive("admin", 1);
