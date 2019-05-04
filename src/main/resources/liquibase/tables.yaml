@@ -46,7 +46,7 @@ databaseChangeLog:
             type: longtext
         - column:
             name: is_active
-            type: tinyint
+            type: tinyint(1)
             constraints:
               nullable: false
         - column:
@@ -129,6 +129,11 @@ databaseChangeLog:
         - column:
             name: to_date
             type: date
+            constraints:
+              nullable: false
+        - column:
+            name: is_approved
+            type: tinyint(1)
             constraints:
               nullable: false
         - column:

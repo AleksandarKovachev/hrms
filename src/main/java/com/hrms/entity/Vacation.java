@@ -32,6 +32,8 @@ public class Vacation implements Serializable {
 
 	private Date toDate;
 
+	private int isApproved;
+
 	@CreatedDate
 	private Date createDate;
 

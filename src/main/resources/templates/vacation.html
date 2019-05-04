@@ -24,12 +24,100 @@
 		</form>
 
 		<h2 class="row justify-content-md-center"
-			th:text="#{vacations.header}"></h2>
+			th:text="#{myVacations.header}"
+			th:if="${!#lists.isEmpty(myVacations)}"></h2>
+
+		<div class="container shadow-lg p-3 mb-5 bg-white"
+			th:if="${!#lists.isEmpty(myVacations)}">
+			<table class="table table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col" th:text="#{input.fromDate}"></th>
+						<th scope="col" th:text="#{input.toDate}"></th>
+						<th scope="col" th:text="#{status}"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="vacation : ${myVacations}">
+						<td th:text="${#dates.format(vacation.fromDate, 'dd MMMM yyyy')}"></td>
+						<td th:text="${#dates.format(vacation.toDate, 'dd MMMM yyyy')}"></td>
+						<td th:if="${vacation.isApproved == 1}" th:text="#{approved}"></td>
+						<td th:if="${vacation.isApproved == 0}" th:text="#{pending}"></td>
+						<td th:if="${vacation.isApproved == -1}" th:text="#{rejected}"></td>
+					</tr>
+				</tbody>
+			</table>
+			</th:block>
+		</div>
+
+		<div class="container shadow-lg p-3 mb-5 bg-white"
+			th:if="${!#lists.isEmpty(approvals)}">
+
+			<h2 class="row justify-content-md-center"
+				th:text="#{approvals.header}"></h2>
+
+			<th:block th:each="approval : ${approvals}">
+				<div class="row justify-content-md-center"
+					th:id="'row_' + ${approval.id}">
+					<div class="col col-md-auto">
+						<a th:href="${approval.user.username}">
+							<img
+								th:src="${approval.user.profileImage == null ? '/images/profile-placeholder.png' : 'data:image/png;base64,' + approval.user.profileImage}"
+								class="img-fluid rounded-circle mx-auto d-block"
+								style="max-height: 100px;">
+						</a>
+					</div>
+					<div class="col col-md-auto">
+						<div class="row">
+							<div class="col col-md-auto">
+								<a th:href="${approval.user.username}">
+									<strong class="text-center"
+										th:text="${approval.user.firstName + ' ' + approval.user.lastName}"></strong>
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-md-auto">
+								<span th:text="#{input.fromDate}"></span>
+							</div>
+							<div class="col col-md-auto">
+								<strong class="text-center"
+									th:text="${#dates.format(approval.fromDate, 'dd MMMM yyyy')}"></strong>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-md-auto">
+								<span th:text="#{input.toDate}"></span>
+							</div>
+							<div class="col col-md-auto">
+								<strong class="text-center"
+									th:text="${#dates.format(approval.toDate, 'dd MMMM yyyy')}"></strong>
+							</div>
+						</div>
+					</div>
+					<div class="col col-md-auto">
+						<div class="row">
+							<div class="col col-md-auto">
+								<button type="button" class="btn btn-danger"
+									th:id="'reject_' + ${approval.id}" th:text="#{button.reject}"></button>
+							</div>
+							<div class="col col-md-auto">
+								<button type="button" class="btn btn-success"
+									th:id="'approve_' + ${approval.id}" th:text="#{button.approve}"></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</th:block>
+		</div>
+
+		<h2 class="row justify-content-md-center"
+			th:text="#{vacations.header}" th:if="${!#lists.isEmpty(vacations)}"></h2>
 
 		<div class="container shadow-lg p-3 mb-5 bg-white"
 			th:each="vacation : ${vacations}">
-			<div class="row">
-				<div class="col col-lg-2">
+			<div class="row justify-content-md-center">
+				<div class="col col-md-auto">
 					<a th:href="${vacation.user.username}">
 						<img
 							th:src="${vacation.user.profileImage == null ? '/images/profile-placeholder.png' : 'data:image/png;base64,' + vacation.user.profileImage}"
@@ -37,7 +125,7 @@
 							style="max-height: 150px;">
 					</a>
 				</div>
-				<div class="col">
+				<div class="col col-md-auto">
 					<div class="row justify-content-md-center">
 						<a th:href="${vacation.user.username}">
 							<strong class="text-center"
@@ -49,19 +137,19 @@
 							th:text="${vacation.user.department.name}"></strong>
 					</div>
 					<div class="row justify-content-md-center">
-						<div class="col col-lg-2">
+						<div class="col col-md-auto">
 							<span th:text="#{input.fromDate}"></span>
 						</div>
-						<div class="col col-lg-2">
+						<div class="col col-md-auto">
 							<strong class="text-center"
 								th:text="${#dates.format(vacation.fromDate, 'dd MMMM yyyy')}"></strong>
 						</div>
 					</div>
 					<div class="row justify-content-md-center">
-						<div class="col col-lg-2">
+						<div class="col col-md-auto">
 							<span th:text="#{input.toDate}"></span>
 						</div>
-						<div class="col col-lg-2">
+						<div class="col col-md-auto">
 							<strong class="text-center"
 								th:text="${#dates.format(vacation.toDate, 'dd MMMM yyyy')}"></strong>
 						</div>
@@ -74,7 +162,27 @@
 		<script>
 			$(document).ready(function() {
 				$('.datepicker').datepicker({format: 'dd/mm/yyyy'});
+
+				$('[id^="reject_"]').click(function() {
+					var vacationId = this.id.split("reject_")[1];
+					vacation(vacationId, -1);
+				});
+
+				$('[id^="approve_"]').click(function() {
+					var vacationId = this.id.split("approve_")[1];
+					vacation(vacationId, 1);
+				});
 			});
+
+			function vacation(vacationId, isApproved) {
+				$.ajax({
+					type : 'PATCH',
+					url : "/vacation/" + vacationId + "?isApproved=" + isApproved,
+					success : function(response) {
+						$("#row_" + vacationId).remove();
+					}
+				});
+			};
 		</script>
 	</section>
 </body>
